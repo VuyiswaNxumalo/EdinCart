@@ -71,7 +71,12 @@ export default function Cart() {
 
           <div className="mt-4 flex items-center justify-between rounded-lg bg-white p-4 shadow">
             <p className="text-lg font-bold">Total: {money(cart.total)}</p>
-            <p className="text-sm text-gray-500">Checkout coming in the next step</p>
+            <Link
+              to="/checkout"
+              className="rounded bg-gray-900 px-4 py-2 font-medium text-white"
+            >
+              Checkout
+            </Link>
           </div>
         </>
       )}

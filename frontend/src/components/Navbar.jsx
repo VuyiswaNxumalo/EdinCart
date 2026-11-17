@@ -18,6 +18,9 @@ export default function Navbar() {
           </Link>
           {user ? (
             <>
+              <Link to="/orders" className="font-medium hover:underline">
+                Orders
+              </Link>
               <span className="text-gray-600">Hi, {user.username}</span>
               <button onClick={logout} className="font-medium hover:underline">
                 Log out

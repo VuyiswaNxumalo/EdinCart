@@ -9,14 +9,18 @@ export function CartProvider({ children }) {
   const { user } = useAuth();
   const [cart, setCart] = useState(EMPTY);
 
+  function refresh() {
+    return api("/cart/", { auth: true })
+      .then(setCart)
+      .catch(() => {});
+  }
+
   useEffect(() => {
     if (!user) {
       setCart(EMPTY);
       return;
     }
-    api("/cart/", { auth: true })
-      .then(setCart)
-      .catch(() => {});
+    refresh();
   }, [user]);
 
   const count = cart.items.reduce((n, item) => n + item.quantity, 0);
@@ -46,7 +50,9 @@ export function CartProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ cart, count, addItem, updateItem, removeItem }}>
+    <CartContext.Provider
+      value={{ cart, count, addItem, updateItem, removeItem, refresh }}
+    >
       {children}
     </CartContext.Provider>
   );
