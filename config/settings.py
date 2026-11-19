@@ -153,3 +153,22 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+
+# --- PostgreSQL (settings come from the .env file) ---
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv(BASE_DIR / ".env")
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME", "edincart"),
+        "USER": os.environ.get("DB_USER", "edincart"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
+    }
+}
